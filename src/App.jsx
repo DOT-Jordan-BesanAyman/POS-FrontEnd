@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -15,8 +15,13 @@ import Settings from "./pages/Settings";
 import Users from './pages/Users'
 import Categories from './pages/Categories'
 import AddProducts from './pages/AddProducts'
+import axios from 'axios'
 
 function App() {
+  useEffect(()=>{
+    axios.get("https://pos-backend-rb6m.onrender.com/api/v1/health")
+      .catch(() => {})
+  },[])
   const [count, setCount] = useState(0)
 
   return (
@@ -34,6 +39,7 @@ function App() {
         <Route path='/Categories' element={<Categories/>} />
         <Route path='/AddProducts/:id' element={<AddProducts/>}/>
       </Routes>
+      
     </>
   )
 }
